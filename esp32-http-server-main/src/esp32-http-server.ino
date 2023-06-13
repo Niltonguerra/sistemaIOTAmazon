@@ -25,39 +25,113 @@ const int LED2 = 27;
 bool led1State = false;
 bool led2State = false;
 
+
+
+///minhas alterações!!!
+
+String dadoRecebido = ""; // Variável para armazenar o dado recebido
+
+
+
+
 void sendHtml() {
   String response = R"(
     <!DOCTYPE html><html>
       <head>
         <title>ESP32 Web Server Demo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        <!-- -------------------------------------- -->
         <style>
-          html { font-family: sans-serif; text-align: center; }
-          body { display: inline-flex; flex-direction: column; }
-          h1 { margin-bottom: 1.2em; } 
-          h2 { margin: 0; }
-          div { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; grid-auto-flow: column; grid-gap: 1em; }
-          .btn { background-color: #5B5; border: none; color: #fff; padding: 0.5em 1em;
-                 font-size: 2em; text-decoration: none }
-          .btn.OFF { background-color: #333; }
+
+          html { 
+            font-family: sans-serif; 
+            text-align: center; 
+          }
+
+          body { 
+            display: inline-flex; 
+            flex-direction: column; 
+          }
+
+          h1 { 
+            margin-bottom: 1.2em; 
+          } 
+
+          h2 { 
+            margin: 0; 
+          }
+
+          div { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            grid-template-rows: auto auto; 
+            grid-auto-flow: column; 
+            grid-gap: 1em; 
+          }
+
+          .btn { 
+            background-color: #5B5; 
+            border: none; 
+            color: #fff; 
+            padding: 0.5em 1em;
+            font-size: 2em; 
+            text-decoration: none 
+          }
+
+          .btn.OFF { 
+            background-color: #333; 
+          }
+
         </style>
+
+        <!-- ------------------------------------ -->
       </head>
             
       <body>
+
         <h1>ESP32 Web Server</h1>
 
         <div>
-          <h2>LED 1</h2>
-          <a href="/toggle/1" class="btn LED1_TEXT">LED1_TEXT</a>
+
           <h2>LED 2</h2>
-          <a href="/toggle/2" class="btn LED2_TEXT">LED2_TEXT</a>
+          <a href="/toggle/1/rota" class="btn LED1_TEXT">LED1_TEXT</a>
+
+          <h2>LED 1</h2>
+          <a href="/toggle/2/rota" class="btn LED2_TEXT">LED2_TEXT</a>
+        
         </div>
+
+        
       </body>
+
+
+
     </html>
+
+
+
+
+<script>
+    console.log('teste123');
+</script>
+
   )";
+
+
   response.replace("LED1_TEXT", led1State ? "ON" : "OFF");
   response.replace("LED2_TEXT", led2State ? "ON" : "OFF");
   server.send(200, "text/html", response);
+
+
+///minhas alterações!!!
+
+  // dadoRecebido = server.arg("dado"); // Recebe o dado enviado pelo servidor externo
+  
+  // server.send(200, "text/plain", "Dado recebido com sucesso"); // Responde ao servidor externo
+
+
 }
 
 void setup(void) {
@@ -68,6 +142,8 @@ void setup(void) {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD, WIFI_CHANNEL);
   Serial.print("Connecting to WiFi ");
   Serial.print(WIFI_SSID);
+
+
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(100);
@@ -75,13 +151,26 @@ void setup(void) {
   }
   Serial.println(" Connected!");
 
+
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
   server.on("/", sendHtml);
 
-  server.on(UriBraces("/toggle/{}"), []() {
+
+
+
+
+  server.on(UriBraces("/toggle/{}/rota"), []() {
+
+    //o server.pathArg(0) extrai o primeiro elemento
+    // da url (nesse caso, existe apenas um elemento,
+    // há informação que é simbolizada por: '{}' na linha 
+    // antes desse comantes) 
     String led = server.pathArg(0);
+
+
+    //mostra nas linhas de comando do microcontrolador
     Serial.print("Toggle LED #");
     Serial.println(led);
 
@@ -98,6 +187,22 @@ void setup(void) {
 
     sendHtml();
   });
+
+
+
+
+
+//minhas alterações!!!
+
+  server.on("/toggle/{}/rota", HTTP_POST, []() {
+    String dadoRecebido = server.arg("dado");
+    // Faça algo com o valor do dado recebido
+    server.send(200, "text/plain", "Dado recebido com sucesso");
+  });
+
+
+
+
 
   server.begin();
   Serial.println("HTTP server started (http://localhost:8180)");

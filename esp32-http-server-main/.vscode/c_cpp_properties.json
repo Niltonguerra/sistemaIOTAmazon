@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/esp32-http-server-main/include",
-                "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/esp32-http-server-main/src",
+                "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/sistemaIOTAmazon/esp32-http-server-main/include",
+                "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/sistemaIOTAmazon/esp32-http-server-main/src",
                 "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                 "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                 "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
@@ -239,8 +239,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/esp32-http-server-main/include",
-                    "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/esp32-http-server-main/src",
+                    "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/sistemaIOTAmazon/esp32-http-server-main/include",
+                    "C:/Users/nilto/OneDrive/Documentos/PlatformIO/Projects/esp32-http-server-main/sistemaIOTAmazon/esp32-http-server-main/src",
                     "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                     "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                     "C:/Users/nilto/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
